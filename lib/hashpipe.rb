@@ -5,8 +5,6 @@ module HashPipe
   # XXX we don't inherit from OpenStruct here because I'd have to play with its guts.
   #++
   class SuperOpenStruct
-    include Enumerable
-
     def self.create_accessor(sym, obj)
       sym = sym.to_sym
       attr_accessor(sym) unless obj.respond_to?(sym)
