@@ -7,4 +7,33 @@ class TestHashpipeSuperOpenStruct < Test::Unit::TestCase
     assert_kind_of(HashPipe::SuperOpenStruct, h)
     assert_respond_to(h, :lock!)
   end
+
+  def test_02_accessors
+    h = create_sos
+
+    h.foo = "bar"
+    assert_equal(h.foo,    "bar")
+    assert_equal(h[:foo],  "bar")
+    assert_equal(h['foo'], "bar")
+    
+    h.bar = "baz"
+    assert_equal(h.bar,    "baz")
+    assert_equal(h[:bar],  "baz")
+    assert_equal(h['bar'], "baz")
+  end
+
+  def test_03_lock
+    h = create_sos
+
+    h.foo = "bar"
+    h.lock!
+
+    assert_raises(ArgumentError.new("this openstruct is locked.")) do 
+      h.bar = "baz"
+    end
+
+    assert_equal(h.foo,    "bar")
+    assert_equal(h[:foo],  "bar")
+    assert_equal(h['foo'], "bar")
+  end
 end
