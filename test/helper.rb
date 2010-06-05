@@ -7,4 +7,7 @@ $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 require 'hashpipe'
 
 class Test::Unit::TestCase
+  def create_sos
+    HashPipe::SuperOpenStruct.new
+  end
 end

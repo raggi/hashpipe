@@ -1,7 +1,10 @@
 require 'helper'
 
-class TestHashpipe < Test::Unit::TestCase
-  def test_something_for_real
-    flunk "hey buddy, you should probably rename this file and start testing for real"
+class TestHashpipeSuperOpenStruct < Test::Unit::TestCase
+  def test_01_construct
+    h = create_sos
+    assert(h)
+    assert_kind_of(HashPipe::SuperOpenStruct, h)
+    assert_respond_to(h, :lock!)
   end
 end
