@@ -43,18 +43,3 @@ module HashPipe
     end
   end
 end
-
-if $0 == __FILE__
-  h = HashPipe::SuperOpenStruct.new
-  h.foo = "bar"
-  h.bar = "baz"
-  h.lock!
-  p h['bar']
-  p h[:bar]
-  p h.foo
-  p h.quux = "bar"
-
-  h2 = HashPipe::SuperOpenStruct.new
-  h2.quux = "quux"
-  p h2.quux
-end
