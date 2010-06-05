@@ -5,12 +5,13 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "hashpipe"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{Hash primitive and helper toolkit}
+    gem.description = %Q{Create openstructs that are also symbol and string structs! Lock them! Index them! You've got your problems, I've got your hash pipe.}
     gem.email = "erik@hollensbe.org"
     gem.homepage = "http://github.com/erikh/hashpipe"
     gem.authors = ["Erik Hollensbe"]
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
+    gem.add_development_dependency 'test-unit'
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
