@@ -45,8 +45,33 @@ class TestHashpipeSuperOpenStruct < Test::Unit::TestCase
     assert_raises(ArgumentError) { h[:map] = "foo" }
     assert_raises(ArgumentError) { h['map'] = "foo" }
   end
-
-  def test_05_enumerable
+  
+  def test_05_keys_values
     h = create_sos
+    h.foo = "bar"
+    h.bar = "quux"
+
+    assert_equal(
+      h.keys.sort_by { |x| x.to_s }, 
+      [:bar, :foo]
+    )
+
+    assert_equal(
+      h.values.sort_by { |x| x.to_s }, 
+      ["bar", "quux"]
+    )
+  end
+
+  def test_06_enumerable
+    h = create_sos
+    assert_respond_to(h, :map)
+
+    h[:foo] = "bar"
+    h.bar   = :foo
+
+    assert_equal(
+      h.map { |k,v| [k,v] }.sort_by { |r| r[0].to_s }, 
+      [[:bar, :foo], [:foo, "bar"]]
+    )
   end
 end

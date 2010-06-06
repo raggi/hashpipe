@@ -10,6 +10,10 @@ module HashPipe
       end.class_eval { attr_accessor(sym) }
     end
 
+    def self.callable_ivar(ivar)
+      ivar.to_s.gsub(/^@/, '').to_sym
+    end
+
     include Enumerable
 
     def initialize
@@ -35,9 +39,17 @@ module HashPipe
           end
         end
 
+        def keys
+          instance_variables.map { |ivar| self.class.callable_ivar(ivar) } 
+        end
+
+        def values
+          instance_variables.map { |ivar| self.send(self.class.callable_ivar(ivar)) }
+        end
+
         def each
           instance_variables.each do |ivar|
-            callable = ivar.to_s.gsub(/^@/, '').to_sym
+            callable = self.class.callable_ivar(ivar)
             yield(callable, self.send(callable))
           end
         end
