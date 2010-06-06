@@ -36,4 +36,17 @@ class TestHashpipeSuperOpenStruct < Test::Unit::TestCase
     assert_equal(h[:foo],  "bar")
     assert_equal(h['foo'], "bar")
   end
+
+  def test_04_overwrite
+    h = create_sos
+    assert_respond_to(h, :map)
+
+    assert_raises(ArgumentError) { h.map = "foo" }
+    assert_raises(ArgumentError) { h[:map] = "foo" }
+    assert_raises(ArgumentError) { h['map'] = "foo" }
+  end
+
+  def test_05_enumerable
+    h = create_sos
+  end
 end
