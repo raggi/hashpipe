@@ -23,18 +23,27 @@ class TestHashpipeSuperOpenStruct < Test::Unit::TestCase
   end
 
   def test_03_lock
+    h2 = create_sos
     h = create_sos
 
     h.foo = "bar"
     h.lock!
 
-    assert_raises(ArgumentError.new("this openstruct is locked.")) do 
+    assert_raises(NoMethodError) do
       h.bar = "baz"
     end
 
     assert_equal(h.foo,    "bar")
     assert_equal(h[:foo],  "bar")
     assert_equal(h['foo'], "bar")
+
+    # should not raise
+    h2.bar = "baz"
+    h2.bar = "baz"
+
+    assert_equal(h2.bar,    "baz")
+    assert_equal(h2[:bar],  "baz")
+    assert_equal(h2['bar'], "baz")
   end
 
   def test_04_overwrite
