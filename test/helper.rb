@@ -8,6 +8,6 @@ require 'hashpipe'
 
 class Test::Unit::TestCase
   def create_sos
-    HashPipe::SuperOpenStruct.new
+    HashPipe.new
   end
 end
